@@ -8,10 +8,15 @@ export interface ICharacter extends Document {
   species?: String;
   type?: String;
   image?: String;
-  origin_name?: String;
-  origin_url?: String;
-  location_name?: String;
-  location_url?: String;
+  origin?: {
+    name: String;
+    url: String;
+  };
+  location?: {
+    name: String;
+    url: String;
+  };
+  episode?: [];
 }
 
 const characterSchema = new Schema<ICharacter>({
@@ -42,17 +47,24 @@ const characterSchema = new Schema<ICharacter>({
     type: String,
     default: "",
   },
-  origin_name: {
-    type: String,
+  origin: {
+    name: {
+      type: String,
+    },
+    url: {
+      type: String,
+    },
   },
-  origin_url: {
-    type: String,
+  location: {
+    name: {
+      type: String,
+    },
+    url: {
+      type: String,
+    },
   },
-  location_name: {
-    type: String,
-  },
-  location_url: {
-    type: String,
+  episode: {
+    type: Array,
   },
 });
 

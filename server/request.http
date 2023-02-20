@@ -1,0 +1,43 @@
+
+@api = http://localhost:3001
+
+### Get all character 
+GET {{api}}/character
+content-type: application/json
+
+{
+    "filterValues": {
+        "name": "pepito",
+        "status": "Alive"
+    }
+}
+
+### Get character by id
+GET {{api}}/character/1
+
+### Create character
+POST {{api}}/character
+content-type: application/json
+
+{
+    "name": "jorge",
+    "status": "Alive",
+    "gender": "Genderless"
+}
+
+### Delete characters
+DELETE  {{api}}/character
+
+### Delete character
+DELETE  {{api}}/character/63f3e25511b412474a721a38
+
+### Update character
+PATCH   {{api}}/character/63f3faeacabd85ce5d69e018
+content-type: application/json
+
+{
+    "fields":{
+        "name": "Pepito",
+        "image": "aasdasdas"
+    }
+}
