@@ -5,6 +5,7 @@ import Character from "../models/Character";
 export const allCharacters: RequestHandler = async (req, res) => {
   try {
     let { filterValues } = req.body;
+    console.log("*", filterValues);
     //---------------Peticion de todos los perdonajes a la base de datos---------------------
     const infoDB = await Character.find();
 
@@ -19,30 +20,19 @@ export const allCharacters: RequestHandler = async (req, res) => {
       let data = await axios.all(promises);
       let infoAPI = data.map((e) => e.data.results).flat(1);
 
-      infoAPI = infoAPI.map((e) => ({
-        _apiID: e.id,
-        name: e.name,
-        status: e.status,
-        gender: e.gender,
-        species: e.species,
-        type: e.type,
-        image: e.image,
-        origin_name: e.origin.name,
-        origin_url: e.origin.url,
-        location_name: e.location.name,
-        location_url: e.location.url,
-      }));
-
       Character.collection.insertMany(infoAPI);
       return res.json(infoAPI);
     }
 
     //---------------Filtro los personajes---------------------
     if (filterValues) {
-      const characters = await Character.
-      // find({ name: filterValues.name })
-      // .where("name")
-      // .equals(filterCharacters.name);
+      if (filterValues.name)
+        filterValues.name = new RegExp(filterValues.name, "i");
+      if (filterValues.type)
+        filterValues.type = new RegExp(filterValues.type, "i");
+      if (filterValues.species)
+        filterValues.species = new RegExp(filterValues.species, "i");
+      const characters = await Character.find(filterValues);
       return res.status(200).json(characters);
     }
 
@@ -79,6 +69,7 @@ export const createCharacter: RequestHandler = async (req, res) => {
   }
 };
 
+//------------- Solamente de desarrollo ------------------------------
 export const deleteCharacters: RequestHandler = async (req, res) => {
   try {
     await Character.deleteMany();
@@ -89,10 +80,25 @@ export const deleteCharacters: RequestHandler = async (req, res) => {
   }
 };
 
-const filterCharacters: RequestHandler = async (filter) => {
+export const deleteCharacter: RequestHandler = async (req, res) => {
+  const { id } = req.params;
   try {
-    return { message: `Characters filtered` };
+    const character = await Character.deleteOne({ _id: id });
+
+    return res.status(200).json(character);
   } catch (error) {
-    return error;
+    return res.status(400).json(error);
+  }
+};
+
+export const updateCharacter: RequestHandler = async (req, res) => {
+  const { id } = req.params;
+  const { fields } = req.body;
+  try {
+    const character = await Character.updateOne({ _id: id }, { $set: fields });
+
+    return res.status(200).json(character);
+  } catch (error) {
+    return res.status(400).json(error);
   }
 };
