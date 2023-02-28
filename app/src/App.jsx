@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import landingPage from "./components/LandingPage/LandingPage";
-import './App.css'
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { characters } from "./redux/actions";
@@ -13,11 +12,9 @@ function App() {
   useEffect(() => {
     //-----Si no hay personajes los pido-----
     if (!allCharacter.length) {
-      console.log("Se piden todos los personajes desde el app.jsx");
       dispactch(characters())
     }
   }, [])
-
 
   return (
     <Router>
