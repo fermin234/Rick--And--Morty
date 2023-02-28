@@ -23,7 +23,7 @@ export default function ScrollInfinite() {
       >
         <div className={s.containerAll}>
           {
-            characters.length ? characters.map(e => <Card key={e._id} id={e._id} name={e.name} image={e.image} />) : ""
+            characters.length ? characters.map(e => <Card key={e._id} id={e._id} name={e.name} image={e.image} origin={e.origin.name} location={e.location.name} species={e.species} status={e.status} />) : ""
           }
         </div>
       </InfiniteScroll>
