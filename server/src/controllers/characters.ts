@@ -4,8 +4,19 @@ import Character from "../models/Character";
 
 export const allCharacters: RequestHandler = async (req, res) => {
   try {
+    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
+    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
+    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
+    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
+    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
+    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
+    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
+    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
+    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
     let { filterValues } = req.body;
-    console.log("*", filterValues);
+    let prueba = req.query;
+    console.log(prueba.filterValues);
+
     //---------------Peticion de todos los perdonajes a la base de datos---------------------
     const infoDB = await Character.find();
 
@@ -28,12 +39,15 @@ export const allCharacters: RequestHandler = async (req, res) => {
     if (filterValues) {
       if (filterValues.name)
         filterValues.name = new RegExp(filterValues.name, "i");
+
       if (filterValues.type)
         filterValues.type = new RegExp(filterValues.type, "i");
+
       if (filterValues.species)
         filterValues.species = new RegExp(filterValues.species, "i");
+
       const characters = await Character.find(filterValues);
-      return res.status(200).json(characters);
+      return res.status(200).json({ result: characters.length, characters });
     }
 
     return res.json(infoDB);
