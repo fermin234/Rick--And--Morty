@@ -1,6 +1,8 @@
-import axios from "axios";
+import axios, { Axios } from "axios";
 export const GET_CHARACTERS = "GET_CHARACTERS";
 export const INFINITE_SCROLL = "INFINITE_SCROLL";
+export const CLEAN_FILTERS = "CLEAN_FILTERS";
+export const FILTER = "FILTER";
 
 export function characters() {
   try {
@@ -27,4 +29,22 @@ export function fetchMoreData(data) {
   } catch (err) {
     return err;
   }
+}
+
+export function cleanFilters() {
+  return async (dispatch) => {
+    return dispatch({
+      type: CLEAN_FILTERS,
+    });
+  };
+}
+
+export function filter(data) {
+  return async (dispatch) => {
+    await axios.get(`/character?filterValues=${data}`);
+    return dispatch({
+      type: FILTER,
+      payload: data,
+    });
+  };
 }
