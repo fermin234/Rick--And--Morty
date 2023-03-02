@@ -3,14 +3,21 @@
 
 ### Get all character 
 GET {{api}}/character
-content-type: application/json
 
-{
-    "filterValues": {
-        "name": "pepito",
-        "status": "Alive"
-    }
-}
+### Filter character 
+GET {{api}}/character?data={"status": "unknown"}
+# content-type: application/json
+
+# {
+#     "filterValues": {
+#         "status": "Alive"
+#     }
+# }
+###"name": "Rick",                                              INPUT
+###"species": "",                                               INPUT
+###"type": "",                                                  INPUT
+###"status": "Alive", //Alive || Dead || Unknow *               CHECKBOXS
+###"gender": "female" //Female || Male || Genderless || Unknow  CHECKBOXS
 
 ### Get character by id
 GET {{api}}/character/1
@@ -29,7 +36,7 @@ content-type: application/json
 DELETE  {{api}}/character
 
 ### Delete character
-DELETE  {{api}}/character/63f3e25511b412474a721a38
+DELETE  {{api}}/character/63f3faeacabd85ce5d69e018
 
 ### Update character
 PATCH   {{api}}/character/63f3faeacabd85ce5d69e018
@@ -41,3 +48,6 @@ content-type: application/json
         "image": "aasdasdas"
     }
 }
+
+### Get all species 
+GET {{api}}/species

@@ -2,20 +2,35 @@ import axios from "axios";
 import { RequestHandler } from "express-serve-static-core";
 import Character from "../models/Character";
 
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+//agregar codigos de respuesta
+
 export const allCharacters: RequestHandler = async (req, res) => {
   try {
-    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
-    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
-    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
-    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
-    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
-    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
-    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
-    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
-    //Solucionar problema al traer los datos del filtrado problema con el tipado de request
-    let { filterValues } = req.body;
-    let prueba = req.query;
-    console.log(prueba.filterValues);
+    let { data } = req.query;
+    //Decode-data
+    let filterValues = data && JSON.parse(decodeURIComponent(data as string));
 
     //---------------Peticion de todos los perdonajes a la base de datos---------------------
     const infoDB = await Character.find();
@@ -47,7 +62,7 @@ export const allCharacters: RequestHandler = async (req, res) => {
         filterValues.species = new RegExp(filterValues.species, "i");
 
       const characters = await Character.find(filterValues);
-      return res.status(200).json({ result: characters.length, characters });
+      return res.status(200).json(characters);
     }
 
     return res.json(infoDB);
@@ -57,9 +72,8 @@ export const allCharacters: RequestHandler = async (req, res) => {
 };
 
 export const idCharacter: RequestHandler = async (req, res) => {
-  const { id } = req.params;
-
   try {
+    const { id } = req.params;
     const result = await axios.get(`${process.env.API}/character/${id}`);
     return res.json(result.data);
   } catch (error) {

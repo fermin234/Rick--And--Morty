@@ -1,14 +1,17 @@
 import {
+  FILTER,
+  GET_SPECIES,
+  RESET_SCROLL,
+  CLEAN_FILTERS,
   GET_CHARACTERS,
   INFINITE_SCROLL,
-  CLEAN_FILTERS,
-  FILTER,
 } from "./actions";
 
 const initialState = {
   characters: [],
-  filteredItems: [],
+  species: [],
   items: [],
+  filteredItems: [],
   filterValues: {
     name: null,
     species: null,
@@ -24,13 +27,17 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         characters: action.payload,
+        filteredItems: action.payload,
         items: [...action.payload.slice(0, 30)],
       };
 
     case INFINITE_SCROLL:
-      const sliceCharacters = [
+      let sliceCharacters = [
         ...state.items,
-        ...state.characters.slice(state.items.length, state.items.length + 25),
+        ...state.filteredItems.slice(
+          state.items.length,
+          state.items.length + 25
+        ),
       ];
 
       return {
@@ -41,6 +48,7 @@ export default function rootReducer(state = initialState, action) {
     case CLEAN_FILTERS:
       return {
         ...state,
+        filteredItems: state.characters,
         items: [...state.characters.slice(0, 30)],
         filterValues: {
           name: null,
@@ -52,13 +60,23 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case FILTER:
-      const filterCharacters = [];
-
       return {
         ...state,
-        filteredItems: filterCharacters,
-        items: filterCharacters.splice(0, 30),
-        filterValues: action.payload,
+        filteredItems: action.payload.data,
+        items: action.payload.data.splice(0, 30),
+        filterValues: action.payload.filterValues,
+      };
+
+    case GET_SPECIES:
+      return {
+        ...state,
+        species: action.payload,
+      };
+
+    case RESET_SCROLL:
+      return {
+        ...state,
+        items: [],
       };
 
     default:

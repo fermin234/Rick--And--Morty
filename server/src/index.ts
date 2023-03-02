@@ -7,5 +7,6 @@ axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 app.listen(config.PORT, async () => {
   await axios.get(`/character`);
+  await axios.get(`/species`);
   console.log(`Server listen in port ${config.PORT}`);
 });
