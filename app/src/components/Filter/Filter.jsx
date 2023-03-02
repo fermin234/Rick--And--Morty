@@ -1,10 +1,11 @@
-import { Box, Input, Radio, RadioGroup, Stack, Button } from "@chakra-ui/react";
+import { Box, Input, Radio, RadioGroup, Stack, Button, Select } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { cleanFilters, filter } from "../../redux/actions";
 
 export default function Filter({ onClose }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const filterValues = useSelector(s => s.filterValues)
+  const species = useSelector(s => s.species)
   //Agregar debounce a los inputs
   //Agregar debounce a los inputs
   //Agregar debounce a los inputs
@@ -13,7 +14,11 @@ export default function Filter({ onClose }) {
   //Agregar debounce a los inputs
   //Agregar debounce a los inputs
   //Agregar debounce a los inputs
-
+  function filterCharacters(value, name) {
+    if (!value) return
+    filterValues[name] = value
+    dispatch(filter(filterValues))
+  }
   return (
     <Box display="flex" flexDirection="column" justifyContent="space-around" height="100%">
 
@@ -22,7 +27,11 @@ export default function Filter({ onClose }) {
         <Box display="flex" justifyContent="center">
           Species
         </Box>
-        <Input variant='filled' textAlign="center" placeholder='Human | Alien | Humanoid ...' defaultValue={filterValues.species ? filterValues.species : ""} onChange={e => { filterValues.species = e.target.value, dispatch(filter(filterValues)) }} />
+        <Select textAlign="center" placeholder='Human | Alien | Humanoid ...' defaultValue={filterValues.species ? filterValues.species : ""} onChange={e => filterCharacters(e.target.value, "species")}>
+          {species ? species.map(e => <option value={e.name} key={e.name}>{e.name}</option>) : ""}
+        </Select>
+
+        {/* <Input variant='filled' textAlign="center" placeholder='Human | Alien | Humanoid ...' defaultValue={filterValues.species ? filterValues.species : ""} onChange={e => filterCharacters(e, "species")} /> */}
       </Box>
       {/* ------------------------ */}
 
@@ -31,7 +40,7 @@ export default function Filter({ onClose }) {
         <Box display="flex" justifyContent="center">
           Type
         </Box>
-        <Input variant='filled' textAlign="center" placeholder=' Experiment | Superhuman ...' defaultValue={filterValues.type ? filterValues.type : ""} onChange={e => { filterValues.type = e.target.value, dispatch(filter(filterValues)) }} />
+        <Input variant='filled' textAlign="center" placeholder=' Experiment | Superhuman ...' defaultValue={filterValues.type ? filterValues.type : ""} onChange={e => filterCharacters(e.target.value, "type")} />
       </Box>
       {/* ------------------------ */}
 
@@ -41,21 +50,18 @@ export default function Filter({ onClose }) {
           Status
         </Box>
         <RadioGroup defaultValue={filterValues.status ? filterValues.status : ""}
-          onChange={(e) => {
-            filterValues.status = e,
-              dispatch(filter(filterValues))
-          }}>
+          onChange={e => filterCharacters(e, "status")}>
           <Stack spacing={5} direction='row' justifyContent="center" my="1">
-            <Radio variant="solid" colorScheme='green' value='Alvie'>
-              Alvie
+            <Radio variant="solid" colorScheme='green' value='Alive'>
+              Alive
             </Radio>
             <Radio colorScheme='red' value='Dead'>
               Dead
             </Radio>
           </Stack>
           <Stack alignItems="center">
-            <Radio colorScheme='gray' value='Unknow'>
-              Unknow
+            <Radio colorScheme='gray' value='unknown'>
+              Unknown
             </Radio>
           </Stack>
         </RadioGroup>
@@ -65,13 +71,10 @@ export default function Filter({ onClose }) {
       {/* Gender  */}
       <Box bgColor="blue.200">
         <Box display="flex" justifyContent="center">
-          Status
+          Gender
         </Box>
         <RadioGroup defaultValue={filterValues.gender ? filterValues.gender : ""}
-          onChange={(e) => {
-            filterValues.gender = e,
-              dispatch(filter(filterValues))
-          }}>
+          onChange={e => filterCharacters(e, "gender")}>
           <Stack spacing={5} display='flex' direction='row' alignItems="center" justifyContent="center" my="1">
             <Radio value='Female'>
               Female
@@ -84,8 +87,8 @@ export default function Filter({ onClose }) {
             <Radio value='Genderless'>
               Genderless
             </Radio>
-            <Radio value='Unknow'>
-              Unknow
+            <Radio value='unknown'>
+              Unknown
             </Radio>
           </Stack>
         </RadioGroup>
