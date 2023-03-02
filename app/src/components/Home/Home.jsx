@@ -5,7 +5,6 @@ import Filter from "../Filter/Filter.jsx";
 import { Button, DrawerBody, useDisclosure, Drawer, DrawerOverlay, DrawerContent, Box } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
 
-
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
