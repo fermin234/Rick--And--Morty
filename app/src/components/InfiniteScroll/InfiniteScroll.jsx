@@ -11,8 +11,6 @@ export default function ScrollInfinite() {
   const filteredItems = useSelector(s => s.filteredItems)
 
   useEffect(() => {
-    dispatch(fetchMoreData(items))
-
     return () => {
       dispatch(resetScroll())
     }

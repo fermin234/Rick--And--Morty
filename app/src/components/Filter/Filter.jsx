@@ -19,6 +19,7 @@ export default function Filter({ onClose }) {
     filterValues[name] = value
     dispatch(filter(filterValues))
   }
+
   return (
     <Box display="flex" flexDirection="column" justifyContent="space-around" height="100%">
 
@@ -30,8 +31,6 @@ export default function Filter({ onClose }) {
         <Select textAlign="center" placeholder='Human | Alien | Humanoid ...' defaultValue={filterValues.species ? filterValues.species : ""} onChange={e => filterCharacters(e.target.value, "species")}>
           {species ? species.map(e => <option value={e.name} key={e.name}>{e.name}</option>) : ""}
         </Select>
-
-        {/* <Input variant='filled' textAlign="center" placeholder='Human | Alien | Humanoid ...' defaultValue={filterValues.species ? filterValues.species : ""} onChange={e => filterCharacters(e, "species")} /> */}
       </Box>
       {/* ------------------------ */}
 
@@ -96,7 +95,8 @@ export default function Filter({ onClose }) {
       {/* ------------------------ */}
 
       {/* Gender  */}
-      <Button onClick={() => { dispatch(cleanFilters()), onClose() }}>
+
+      <Button onClick={() => { dispatch(cleanFilters()), onClose(), document.getElementById("input").value = "", console.log("**", filterValues); }}>
         Clear Filters
       </Button>
       {/* ------------------------ */}
