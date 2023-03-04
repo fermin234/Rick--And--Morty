@@ -62,7 +62,7 @@ export default function rootReducer(state = initialState, action) {
     case FILTER:
       return {
         ...state,
-        filteredItems: action.payload.data,
+        filteredItems: [...action.payload.data],
         items: action.payload.data.splice(0, 30),
         filterValues: action.payload.filterValues,
       };
@@ -76,7 +76,7 @@ export default function rootReducer(state = initialState, action) {
     case RESET_SCROLL:
       return {
         ...state,
-        items: [],
+        items: [...state.filteredItems.splice(0, 30)],
       };
 
     default:
