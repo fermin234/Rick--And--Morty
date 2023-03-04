@@ -4,6 +4,7 @@ import landingPage from "./components/LandingPage/LandingPage";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { characters, getSpecies } from "./redux/actions";
+import FormCreate from "./components/FormCreate/FormCreate";
 
 function App() {
   const dispactch = useDispatch()
@@ -29,6 +30,7 @@ function App() {
       <Switch>
         <Route exact path="/landingPage" component={landingPage} />
         {/* <Route path="/" component={Home} /> */}
+        <Route exact path="/create" component={FormCreate} />
         <Route path="/" component={Home} />
       </Switch>
     </Router>
