@@ -1,5 +1,11 @@
 .containerAll {
-  background-color: rgba(225, 144, 144, 0.293);
+  background: rgb(108, 72, 20);
+  background: linear-gradient(
+    180deg,
+    rgba(108, 72, 20, 1) 0%,
+    rgba(255, 176, 29, 1) 0%,
+    rgba(255, 176, 29, 0.7035189075630253) 100%
+  );
   width: 100%;
   height: 6vh;
   display: flex;
