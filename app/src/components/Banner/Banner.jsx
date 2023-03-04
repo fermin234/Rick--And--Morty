@@ -19,13 +19,13 @@ import s from './banner.module.css'
 
 export default function Banner() {
   return (
-    <Box className={s.imagen} bgColor="purple" height={"28vh"} width="85%" borderRadius="30px" p="30px" position="relative" mb="4" overflow="clip">
+    <Box className={s.imagen} bgColor="purple" height={"28vh"} width="100%" borderRadius="30px" p="30px" position="relative" mb="4" overflow="clip">
       <Heading color="white" fontSize="5xl" ml='10'>Ahora pudes crear tu propio personaje</Heading>
       <Heading position="absolute" right="40" bottom="2" fontSize="2xl">Ir a crear mi personaje aquí</Heading>
 
       <Img src="/src/assets/pngCharacter/rick_morty.png" alt="ryck_morty" isplay="flex" position="absolute" bottom='0' right="-150px" width="300px" />
 
-      <Img className={s.imagen} src="/src/assets/pngCharacter/morty.png" alt="ryck"
+      <Img src="/src/assets/pngCharacter/morty.png" alt="ryck"
         display="flex" position="absolute" bottom='-20px' left="-150px" width="300px"
       />
       <Box display="flex" position="absolute" bottom="2" ml='30'>

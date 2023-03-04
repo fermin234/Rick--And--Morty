@@ -1,6 +1,6 @@
 .containerAll {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 20px;
   overflow: hidden;
