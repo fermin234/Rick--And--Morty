@@ -28,10 +28,9 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/landingPage" component={landingPage} />
-        {/* <Route path="/" component={Home} /> */}
+        <Route exact path="/" component={landingPage} />
         <Route exact path="/create" component={FormCreate} />
-        <Route path="/" component={Home} />
+        <Route exact path="/home" component={Home} />
       </Switch>
     </Router>
   );
