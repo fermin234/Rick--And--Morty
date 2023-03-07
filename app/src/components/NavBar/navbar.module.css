@@ -11,13 +11,3 @@
   top: 0;
   z-index: 10;
 }
-
-.prueba {
-  width: 40vh;
-}
-
-@media only screen and (max-width: 459px) {
-  .prueba {
-    width: 100%;
-  }
-}
