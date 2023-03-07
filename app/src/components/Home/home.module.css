@@ -1,3 +1,25 @@
 .image:hover {
   cursor: pointer;
 }
+
+.statistics {
+  width: 10%;
+}
+
+@media only screen and (max-width: 1296px) {
+  .statistics {
+    width: 20%;
+  }
+}
+
+@media only screen and (max-width: 1136px) {
+  .statistics {
+    width: 25%;
+  }
+}
+
+@media only screen and (max-width: 878px) {
+  .statistics {
+    width: 30%;
+  }
+}
