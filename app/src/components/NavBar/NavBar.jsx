@@ -36,7 +36,7 @@ export default function NavBar({ onOpen }) {
           ?
           <>
             {/* slideBar */}
-            <Box>
+            <Box w="33.3%">
               <Button colorScheme='blue' onClick={onOpen}>
                 <ArrowRightIcon />
               </Button>
@@ -44,15 +44,17 @@ export default function NavBar({ onOpen }) {
             {/* ********* */}
 
             {/* input de busqueda */}
-            <Box className={s.prueba}>
-              <FormControl position="relative" >
-                <InputGroup>
+            <Box className={s.prueba} w="33.3%">
+              <FormControl>
+                <InputGroup position="relative" display="flex" justifyContent="center">
                   <InputLeftElement
+                    left="20%"
+                    position="absolute"
                     pointerEvents='none'
                     children={<Search2Icon color='gray.300' />}
                   />
-                  <Input id="input" width="100%" placeholder='Rick | Morty | Sanchez' textAlign="center" onChange={debouncedChangeHandler} />
-                  <Button h="80%" zIndex="2" bgColor="transparent" _:hover="none" position="absolute" top="1" right="1" display={inputValue ? "flex" : "none"} onClick={onHandleClick}> X </Button>
+                  <Input id="input" width="60%" placeholder='Rick | Morty | Sanchez' textAlign="center" onChange={debouncedChangeHandler} />
+                  <Button h="80%" zIndex="2" bgColor="transparent" _hover={{ background: "transparent" }} position="absolute" top="1" right="20%" display={inputValue ? "flex" : "none"} onClick={onHandleClick}> X </Button>
                 </InputGroup>
               </FormControl>
             </Box>
@@ -62,15 +64,15 @@ export default function NavBar({ onOpen }) {
       }
 
 
-      <Box display="flex" gap="10px">
+      <Box display="flex" justifyContent="end" gap="10px" w="33.3%">
         <Link to="/landingPage">
-          <Button>LandingPage</Button>
+          LandingPage
         </Link>
         <Link to="/create">
-          <Button>Create</Button>
+          Create
         </Link>
         <Link to="/home">
-          <Button>Home</Button>
+          Home
         </Link>
       </Box>
     </Box >

@@ -1,7 +1,37 @@
 .containerAll {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-items: center;
   gap: 20px;
-  overflow: hidden;
+  width: 100%;
+}
+
+@media only screen and (max-width: 1919px) {
+  .containerAll {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media only screen and (max-width: 1376px) {
+  .containerAll {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media only screen and (max-width: 1130px) {
+  .containerAll {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (max-width: 870px) {
+  .containerAll {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 627px) {
+  .containerAll {
+    grid-template-columns: 1fr;
+  }
 }
