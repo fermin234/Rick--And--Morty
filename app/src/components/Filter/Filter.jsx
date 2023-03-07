@@ -2,10 +2,10 @@ import { Box, Input, Radio, RadioGroup, Stack, Button, Select } from "@chakra-ui
 import { useDispatch, useSelector } from "react-redux";
 import { cleanFilters, filter } from "../../redux/actions";
 
-export default function Filter({ onClose }) {
+export default function Filter({ onClose, values, setValues }) {
   const dispatch = useDispatch();
-  const filterValues = useSelector(s => s.filterValues)
   const species = useSelector(s => s.species)
+  const filterValues = useSelector(s => s.filterValues)
   //Agregar debounce a los inputs
   //Agregar debounce a los inputs
   //Agregar debounce a los inputs
@@ -16,8 +16,11 @@ export default function Filter({ onClose }) {
   //Agregar debounce a los inputs
   function filterCharacters(value, name) {
     if (!value) return
-    filterValues[name] = value
-    dispatch(filter(filterValues))
+    setValues(values = {
+      ...values,
+      [name]: value
+    })
+    dispatch(filter(values))
   }
 
   return (
@@ -96,7 +99,15 @@ export default function Filter({ onClose }) {
 
       {/* Gender  */}
 
-      <Button onClick={() => { dispatch(cleanFilters()), onClose(), document.getElementById("input").value = "", console.log("**", filterValues); }}>
+      <Button onClick={() => {
+        dispatch(cleanFilters()), onClose(), document.getElementById("input").value = "", setValues(values = {
+          name: null,
+          species: null,
+          type: null,
+          status: null,
+          gender: null,
+        })
+      }}>
         Clear Filters
       </Button>
       {/* ------------------------ */}

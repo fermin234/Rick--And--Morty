@@ -7,28 +7,32 @@ import { useCallback, useState } from 'react';
 import { filter } from '../../redux/actions';
 import debounce from 'lodash.debounce'
 
-export default function NavBar({ onOpen }) {
+export default function NavBar({ onOpen, values, setValues }) {
   const dispatch = useDispatch()
   const history = useHistory()
   let filterValues = useSelector(s => s.filterValues)
   let [inputValue, setInputValue] = useState("")
 
   function onHandleClick() {
-    setInputValue(filterValues.name = null)
-    dispatch(filter(filterValues))
     setInputValue("")
+    filterValues.name = null
+    dispatch(filter(filterValues))
     document.getElementById("input").value = ""
   }
   const changeHandler = event => {
     setInputValue(inputValue = event.target.value);
-    filterValues.name = inputValue
-    dispatch(filter(filterValues))
+    setValues(values = {
+      ...values,
+      name: event.target.value
+    })
+    dispatch(filter(values))
   };
 
   //estudiar esto que le pasa el event a changeHandler
   const debouncedChangeHandler = useCallback(
-    debounce(changeHandler, 300)
+    debounce(changeHandler, 600)
     , []);
+
   return (
     <Box className={s.containerAll}>
       {
@@ -44,7 +48,7 @@ export default function NavBar({ onOpen }) {
             {/* ********* */}
 
             {/* input de busqueda */}
-            <Box className={s.prueba} w="33.3%">
+            <Box w="33.3%">
               <FormControl>
                 <InputGroup position="relative" display="flex" justifyContent="center">
                   <InputLeftElement
@@ -65,7 +69,7 @@ export default function NavBar({ onOpen }) {
 
 
       <Box display="flex" justifyContent="end" gap="10px" w="33.3%">
-        <Link to="/landingPage">
+        <Link to="/">
           LandingPage
         </Link>
         <Link to="/create">
