@@ -1,13 +1,12 @@
 import { Box, Heading } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 
-export default function Statistics() {
+export default function Statistics({ fondo }) {
   const character = useSelector(s => s.filteredItems)
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" gap="20px" justifyContent="center" bgColor="purple" borderRadius="20px">
-
+    <Box display="flex" flexDirection="column" alignItems="center" gap="20px" justifyContent="center" bgColor="#4130C2" borderRadius="20px" border=" 3px solid black" transition="all 5s">
       {/* Characters */}
-      <Box bgColor="blue.500" display="flex" flexDirection="column" alignItems="center" >
+      <Box bgColor="#2CB5A0" display="flex" flexDirection="column" alignItems="center" px="1" borderTopRadius="15px">
         <Heading as='h4' size='md'>
           Characters
         </Heading>
@@ -17,7 +16,7 @@ export default function Statistics() {
       </Box>
 
       {/* Status */}
-      <Box bgColor="blue.500" display="flex" flexDirection="column" alignItems="center" >
+      <Box bgColor="#2CB5A0" display="flex" flexDirection="column" alignItems="center" >
         <Heading as='h4' size='md'>
           Status
         </Heading>
@@ -36,7 +35,7 @@ export default function Statistics() {
       </Box>
 
       {/* Gender */}
-      <Box bgColor="blue.500" display="flex" flexDirection="column" alignItems="center" >
+      <Box bgColor="#2CB5A0" display="flex" flexDirection="column" alignItems="center" >
         <Heading as='h4' size='md'>
           Gender
         </Heading>
@@ -59,7 +58,7 @@ export default function Statistics() {
       </Box>
 
       {/* Created */}
-      <Box bgColor="blue.500" display="flex" flexDirection="column" alignItems="center" >
+      <Box bgColor="#2CB5A0" w="100%" display="flex" flexDirection="column" alignItems="center" px="1" pt="1" borderBottomRadius="15px">
         <Heading as='h4' size='md'>
           Created
         </Heading>

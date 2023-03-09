@@ -5,9 +5,11 @@ import {
   CLEAN_FILTERS,
   GET_CHARACTERS,
   INFINITE_SCROLL,
+  HANDLE_DARK,
 } from "./actions";
 
 const initialState = {
+  themeDark: false,
   characters: [],
   species: [],
   items: [],
@@ -71,6 +73,12 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         species: action.payload,
+      };
+
+    case HANDLE_DARK:
+      return {
+        ...state,
+        themeDark: action.payload,
       };
 
     case RESET_SCROLL:

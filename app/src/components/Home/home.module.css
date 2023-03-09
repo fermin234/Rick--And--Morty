@@ -25,7 +25,6 @@
 }
 
 .dark {
-  /* 6 el favorito para el dark */
   background: url("/src/assets/wallPaper/dark.png") no-repeat center center
     fixed;
   background-size: cover;

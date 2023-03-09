@@ -1,21 +1,23 @@
 import React, { useState } from "react";
-import NavBar from "../NavBar/NavBar.jsx";
-import ScrollInfinite from "../InfiniteScroll/InfiniteScroll.jsx";
-import Filter from "../Filter/Filter.jsx";
-import { Button, DrawerBody, useDisclosure, Drawer, DrawerContent, Box, Img, Tooltip } from '@chakra-ui/react'
-import { CloseIcon } from '@chakra-ui/icons'
-import Banner from "../Banner/Banner.jsx";
 import s from './home.module.css'
+import NavBar from "../NavBar/NavBar.jsx";
+import Filter from "../Filter/Filter.jsx";
+import Banner from "../Banner/Banner.jsx";
 import Statistics from "../Statistics/Statistics.jsx";
-import { useSelector } from "react-redux";
-import { GiMoon } from "react-icons/gi";
+import ScrollInfinite from "../InfiniteScroll/InfiniteScroll.jsx";
+import { CloseIcon } from '@chakra-ui/icons'
+import { useDispatch, useSelector } from "react-redux";
 import { BsFillMoonFill, BsFillSunFill, BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
+import { Button, DrawerBody, useDisclosure, Drawer, DrawerContent, Box, Img, Tooltip } from '@chakra-ui/react'
+import { handleDarkModeToggle } from "../../redux/actions";
 
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
+  const dispatch = useDispatch()
+  // const [themeDark, setDarkMode] = useState(false);
   const [fondo, setFondo] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure()
   const filterValues = useSelector(s => s.filterValues)
+  const themeDark = useSelector(s => s.themeDark)
   let [values, setValues] = useState({
     name: filterValues.name ? filterValues.name : null,
     species: filterValues.species ? filterValues.species : null,
@@ -24,26 +26,63 @@ export default function Home() {
     gender: filterValues.gender ? filterValues.gender : null,
   })
 
-  const handleDarkModeToggle = () => {
-    setDarkMode(!darkMode);
+  const changeTheme = () => {
+    dispatch(handleDarkModeToggle(!themeDark))
   };
 
   return (
-    <Box className={darkMode ? s.dark : s.light} display="flex" flexDirection="column" overflow="clip" position="relative">
+    <Box className={themeDark ? s.dark : s.light} display="flex" flexDirection="column" overflow="clip" position="relative">
       <NavBar onOpen={onOpen} values={values} setValues={setValues} />
-      {/* darkmode */}
-      <Button position="fixed" left="1" top="100px" zIndex="999" onClick={handleDarkModeToggle} fontSize="100" p="1" bgColor="transparent" border="solid 3px" borderRadius="50%" height="50px" width="50px" color={darkMode ? "white" : "black"}> {darkMode ? <BsFillSunFill /> : <BsFillMoonFill />} </Button>
-      {/* fondo mode */}
-      <Button position="fixed" left="1" top="150px" zIndex="999" fontSize="100" p="1" bgColor="transparent" border="solid 3px" borderRadius="50%" height="50px" width="50px" color={darkMode ? "white" : "black"} onClick={() => setFondo(!fondo)}> {fondo ? <BsFillEyeSlashFill /> : <BsFillEyeFill />} </Button>
 
       {/* Statistics */}
-      <Box display={fondo ? "none" : "flex"} width="100%">
-        <Box className={s.statistics} height="98vh" display="flex" alignItems="end" justifyContent="center" position="sticky" top="0" mx="2">
-          <Statistics position="absolute" />
+      <Box display="flex" width="100%">
+
+        <Box className={s.statistics} display="flex" flexDirection="column" height="98vh" alignItems="center" justifyContent="end" position="sticky" top="0" mx="2" gap="10px" zIndex="100">
+
+          {/* themeDark */}
+          <Button
+            zIndex="999"
+            onClick={changeTheme}
+            fontSize="100"
+            p="1"
+            bgColor="transparent"
+            border="solid 3px"
+            borderRadius="50%"
+            height="50px"
+            width="50px"
+            color={themeDark ? "white" : "black"}
+            transition="all 5s"
+          >
+            {themeDark ? <BsFillSunFill /> : <BsFillMoonFill />}
+          </Button>
+
+          {/* Disable cards */}
+          <Button
+            zIndex="999"
+            fontSize="100"
+            p="1"
+            bgColor="transparent"
+            border="solid 3px"
+            borderRadius="50%"
+            height="50px"
+            width="50px"
+            color={themeDark ? "white" : "black"}
+            onClick={() => setFondo(!fondo)}
+            transition="all 5s"
+          >
+            {themeDark ? <BsFillEyeSlashFill /> : <BsFillEyeFill />}
+          </Button>
+
+          {/* Statistics */}
+          <Box display={fondo ? "none" : "flex"} >
+            <Statistics fondo={fondo} />
+          </Box>
+          {/* ************ */}
+
         </Box>
         {/* ************ */}
 
-        <Box position="relative" my="4" mr="6%" display="flex" flexDirection="column" alignItems="center" zIndex="1" width="100%" mt="7vh">
+        <Box position="relative" my="4" mr="6%" display={fondo ? "none" : "flex"} flexDirection="column" alignItems="center" zIndex="999" width="100%" mt="7vh" >
 
           {/* Banner */}
           <Box w="100%" >
@@ -85,5 +124,3 @@ export default function Home() {
     </Box >
   )
 }
-
-

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./components/home/Home";
+import Home from "./components/Home/Home";
 import landingPage from "./components/LandingPage/LandingPage";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
