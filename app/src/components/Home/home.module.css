@@ -23,3 +23,28 @@
     width: 30%;
   }
 }
+
+.dark {
+  /* 6 el favorito para el dark */
+  background: url("/src/assets/wallPaper/dark.png") no-repeat center center
+    fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  width: 100%;
+  min-height: 100vh;
+  transition: all 5s;
+}
+
+.light {
+  background: url("/src/assets/wallPaper/light.jpg") no-repeat center center
+    fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  width: 100%;
+  min-height: 100vh;
+  transition: all 5s;
+}
