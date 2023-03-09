@@ -5,7 +5,7 @@ import config from "./config/config";
   mongoose.set("strictQuery", false);
   const db = await mongoose.connect(
     // `mongodb://${config.DB_HOST}/${config.DB_NAME}`
-    "mongodb://mongo:pmyFjRpwHTlUQZVAw0gQ@containers-us-west-59.railway.app:6763"
+    `${config.DB_DEPLOY}`
   );
   console.log(`Connection stablished to DB: ${db.connection.name}`);
 })();
