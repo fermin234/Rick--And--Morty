@@ -28,9 +28,9 @@ export default function Banner() {
         Ir a crear mi personaje aquí
       </Link></Heading>
 
-      <Img src="/src/assets/pngCharacter/rick_morty.png" alt="ryck_morty" position="absolute" bottom='0' right="-150px" width="max-content" />
+      <Img src="/src/assets/pngCharacter/rick_morty.png" alt="ryck_morty" position="absolute" bottom='0' right="-150px" width="max-content" zIndex="300" />
 
-      <Img src="/src/assets/pngCharacter/morty.png" alt="ryck" position="absolute" bottom='-20px' left="-150px" width="300px" />
+      <Img src="/src/assets/pngCharacter/morty.png" alt="morty" position="absolute" bottom='-30px' left="-150px" width="300px" />
       <Box display="flex" position="absolute" bottom="2" ml='30'>
         <Checkbox />
         <Heading fontSize="1xl">No volver a mostrar esta informacion.</Heading>
