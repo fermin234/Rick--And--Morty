@@ -1,6 +1,8 @@
 .containerAll {
   /* background-color: #02021c55; */
   background-color: #ffffff2a;
+  background-color: #3a363695;
+  background: #2cb5a0;
   width: 100%;
   height: 6vh;
   display: flex;
@@ -9,5 +11,7 @@
   padding: 0 1%;
   position: fixed;
   top: 0;
-  z-index: 999;
+  z-index: 200;
+  color: whitesmoke;
+  overflow: hidden;
 }
