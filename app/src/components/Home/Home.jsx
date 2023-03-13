@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BsFillMoonFill, BsFillSunFill, BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { Button, DrawerBody, useDisclosure, Drawer, DrawerContent, Box, Img, Tooltip } from '@chakra-ui/react'
 import { characters, getSpecies } from "../../redux/actions";
+import image from "../../assets/pngCharacter/rick_arriba1-removebg-preview.png"
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -153,7 +154,9 @@ export default function Home() {
       {/* Up page */}
       <Box position="fixed" bottom="0" w="100%" right="0" height="30vh" justifyContent="end" alignItems="end" display={fondo ? "none" : "flex"}>
         <Tooltip hasArrow label='Subir' bg='gray.300' color='black' placement='top'>
-          <Img className={s.image} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth', })} src="/src/assets/pngCharacter/rick_arriba1-removebg-preview.png" alt="Rick_up" mr="2" mb="2" />
+          {/* <Img className={s.image} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth', })} src="/src/assets/pngCharacter/rick_arriba1-removebg-preview.png" alt="Rick_up" mr="2" mb="2" /> */}
+          <Img className={s.image} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth', })} src={image} alt="Rick_up" mr="2" mb="2" />
+
         </Tooltip>
       </Box>
       {/* ************ */}
