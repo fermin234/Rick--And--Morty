@@ -8,6 +8,7 @@
   position: relative;
   border-radius: 10px;
   text-align: center;
+  transition: all 3s;
 }
 
 .card .img {
@@ -22,11 +23,10 @@
 }
 
 .card h2 {
-  padding: 5px 10px 0px 10px;
   font-size: 25px;
   transition: all 0.1s;
   z-index: -99;
-  line-height: 17px;
+  line-height: normal;
 }
 
 .card span {
