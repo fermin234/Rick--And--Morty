@@ -11,12 +11,14 @@ import { BsFillMoonFill, BsFillSunFill, BsFillEyeFill, BsFillEyeSlashFill } from
 import { Button, DrawerBody, useDisclosure, Drawer, DrawerContent, Box, Img, Tooltip } from '@chakra-ui/react'
 import { characters, getSpecies } from "../../redux/actions";
 import image from "../../assets/pngCharacter/rick_arriba1-removebg-preview.png"
+import Settings from "../Settings/Settings";
 
 export default function Home() {
   const dispatch = useDispatch()
-  const [themeDark, setThemeDark] = useState(JSON.parse(window.localStorage.getItem("themeDark")))
+  const [themeDark, setThemeDark] = useState(JSON.parse(localStorage.getItem("themeDark")))
+  const [hiddenBanner, setHiddenBanner] = useState(JSON.parse(localStorage.getItem("banner")))
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { isOpen: isOpen2, onOpen: onOpen2, onClose: onClose2 } = useDisclosure()
+  const [isOpen2, setIsOpen2] = useState(false)
 
   const allCharacter = useSelector(s => s.characters)
   const filterValues = useSelector(s => s.filterValues)
@@ -53,7 +55,7 @@ export default function Home() {
   return (
     <Box className={themeDark ? s.dark : s.light} display="flex" flexDirection="column" overflow="clip" position="relative" transition="all 3s">
       <Box display={fondo ? "none" : ""}>
-        <NavBar onOpen={onOpen} values={values} setValues={setValues} />
+        <NavBar onOpen={onOpen} values={values} setValues={setValues} setIsOpen2={setIsOpen2} isOpen2={isOpen2} />
       </Box>
 
       {/* Statistics */}
@@ -61,7 +63,6 @@ export default function Home() {
 
         <Box className={s.statistics} display="flex" flexDirection="column" height="99vh" alignItems="center" justifyContent="end" position="sticky" top="0" ml="2" gap="20px" zIndex="100" >
 
-          <Button position="relative" onClick={() => onOpen2()}>Abrir</Button>
           {/* themeDark */}
           <Button
             zIndex="999"
@@ -108,8 +109,8 @@ export default function Home() {
         <Box position="relative" my="4" mr="6%" display={fondo ? "none" : "flex"} flexDirection="column" alignItems="center" zIndex="100" width="100%" mt="7vh" >
 
           {/* Banner */}
-          <Box w="100%" >
-            <Banner />
+          <Box w="100%" hidden={JSON.parse(localStorage.getItem("hiddenBanner"))}>
+            <Banner setHiddenBanner={setHiddenBanner} />
           </Box>
           {/* ************ */}
 
@@ -119,6 +120,7 @@ export default function Home() {
 
         </Box>
       </Box>
+
 
       {/* Filtro */}
       <Drawer placement='left' onClose={onClose} isOpen={isOpen} size={window.innerWidth > 991 ? "xs" : "r"}>
@@ -137,15 +139,16 @@ export default function Home() {
       {/* ************ */}
 
       {/* Settings */}
-      <Drawer placement='right' onClose2={onClose2} isOpen2={isOpen2} size={window.innerWidth > 991 ? "xs" : "r"}>
+      <Drawer placement='right' onClose={() => setIsOpen2(!isOpen2)} isOpen={isOpen2} size={window.innerWidth > 991 ? "xs" : "r"}>
         <DrawerContent>
           <Box style={{ display: "flex", justifyContent: "center", position: "relative", width: "100%", height: "50px", alignItems: "center" }}>
             Settings
-            <Button onClick={onClose2} style={{ display: "flex", position: "absolute", top: "3px", right: "3px" }}>
+            <Button onClick={() => setIsOpen2(!isOpen2)} style={{ display: "flex", position: "absolute", top: "3px", left: "3px" }}>
               <CloseIcon />
             </Button>
           </Box>
           <DrawerBody>
+            <Settings themeDark={themeDark} setThemeDark={setThemeDark} setHiddenBanner={setHiddenBanner} />
           </DrawerBody>
         </DrawerContent>
       </Drawer>
@@ -154,13 +157,12 @@ export default function Home() {
       {/* Up page */}
       <Box position="fixed" bottom="0" w="100%" right="0" height="30vh" justifyContent="end" alignItems="end" display={fondo ? "none" : "flex"}>
         <Tooltip hasArrow label='Subir' bg='gray.300' color='black' placement='top'>
-          {/* <Img className={s.image} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth', })} src="/src/assets/pngCharacter/rick_arriba1-removebg-preview.png" alt="Rick_up" mr="2" mb="2" /> */}
           <Img className={s.image} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth', })} src={image} alt="Rick_up" mr="2" mb="2" />
 
         </Tooltip>
       </Box>
       {/* ************ */}
 
-    </Box >
+    </Box>
   )
 }
