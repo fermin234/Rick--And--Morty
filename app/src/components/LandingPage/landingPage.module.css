@@ -18,7 +18,7 @@
 
 .containerAll {
   position: relative;
-  background: url("/src/assets/wallpaper/9.webp") no-repeat center center fixed;
+  background: url("/src/assets/wallPaper/9.webp") no-repeat center center fixed;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -30,7 +30,7 @@
 @media only screen and (max-width: 522px) {
   .containerAll {
     position: relative;
-    background: url("/src/assets/wallpaper/fondo_responsive.jpg") no-repeat
+    background: url("/src/assets/wallPaper/fondo_responsive.jpg") no-repeat
       center center fixed;
     background-size: cover;
     -webkit-background-size: cover;
