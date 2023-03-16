@@ -19,7 +19,7 @@ export default function landingPage() {
       {/* ***** */}
 
       {/* Redes */}
-      <div style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", justifyContent: "center", alignItems: "center", gap: "10px", height: "60px", position: "absolute", bottom: "40px", left: "50px", padding: " 0 10px", borderRadius: "15px" }} className={s.redes}>
+      <div className={s.redes}>
         <div>
           <a href="https://github.com/fermin234" target="_blank" rel="noopener noreferrer">
             <FaGithubSquare size="50px" />

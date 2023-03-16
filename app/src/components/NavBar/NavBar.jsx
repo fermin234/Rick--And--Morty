@@ -10,7 +10,7 @@ import debounce from 'lodash.debounce'
 import { IoMdSettings } from "react-icons/io";
 
 
-export default function NavBar({ onOpen, values, setValues, onOpenSettings, setIsOpen2, isOpen2 }) {
+export default function NavBar({ onOpen, values, setValues, setIsOpen2, isOpen2 }) {
   const dispatch = useDispatch()
   const history = useHistory()
   let filterValues = useSelector(s => s.filterValues)
@@ -57,7 +57,7 @@ export default function NavBar({ onOpen, values, setValues, onOpenSettings, setI
               pointerEvents='none'
               children={<Search2Icon color='gray.300' />}
             />
-            <Input id="input" placeholder='Rick | Morty' textAlign="center" onChange={debouncedChangeHandler} _placeholder={{ color: "white" }} />
+            <Input id="input" defaultValue={filterValues.name ? filterValues.name : ""} placeholder='Rick | Morty' textAlign="center" onChange={debouncedChangeHandler} _placeholder={{ color: "white" }} />
             <Button h="80%" zIndex="2" bgColor="transparent" _hover={{ background: "transparent" }} position="absolute" top="1" right="0" display={inputValue ? "flex" : "none"} onClick={onHandleClick}> X </Button>
           </InputGroup>
         </FormControl>

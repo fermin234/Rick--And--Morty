@@ -8,9 +8,10 @@ import ScrollInfinite from "../InfiniteScroll/InfiniteScroll.jsx";
 import { CloseIcon } from '@chakra-ui/icons'
 import { useDispatch, useSelector } from "react-redux";
 import { BsFillMoonFill, BsFillSunFill, BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
-import { Button, DrawerBody, useDisclosure, Drawer, DrawerContent, Box, Img, Tooltip } from '@chakra-ui/react'
+import { Button, DrawerBody, useDisclosure, Drawer, DrawerContent, Box, Img, Tooltip, Heading } from '@chakra-ui/react'
 import { characters, getSpecies } from "../../redux/actions";
 import image from "../../assets/pngCharacter/rick_arriba1-removebg-preview.png"
+import rick_gif from "../../assets/loader/rick.gif"
 import Settings from "../Settings/Settings";
 
 export default function Home() {
@@ -22,6 +23,8 @@ export default function Home() {
 
   const allCharacter = useSelector(s => s.characters)
   const filterValues = useSelector(s => s.filterValues)
+  const filteredItems = useSelector(s => s.filteredItems)
+  const items = useSelector(s => s.items)
   const species = useSelector(s => s.species)
 
   const [fondo, setFondo] = useState(false);
@@ -53,85 +56,98 @@ export default function Home() {
   }, [])
 
   return (
-    <Box className={themeDark ? s.dark : s.light} display="flex" flexDirection="column" overflow="clip" position="relative" transition="all 3s">
+    <Box className={themeDark ? s.dark : s.light} display="flex" flexDirection="column" overflow="clip" position="relative" transition="all 1.5s">
       <Box display={fondo ? "none" : ""}>
         <NavBar onOpen={onOpen} values={values} setValues={setValues} setIsOpen2={setIsOpen2} isOpen2={isOpen2} />
       </Box>
 
-      {/* Statistics */}
-      <Box display="flex" width="100%">
+      {
+        items?.length ?
 
-        <Box className={s.statistics} display="flex" flexDirection="column" height="99vh" alignItems="center" justifyContent="end" position="sticky" top="0" ml="2" gap="20px" zIndex="100" >
+          // {/* Statistics */ }
+          <Box display="flex" width="100%">
 
-          {/* themeDark */}
-          <Button
-            zIndex="999"
-            onClick={() => changeTheme(themeDark)}
-            fontSize="100"
-            p="1"
-            bgColor="transparent"
-            border="solid 3px"
-            borderRadius="50%"
-            height="50px"
-            width="50px"
-            color={themeDark ? "white" : "black"}
-            transition="all 5s"
-          >
-            {themeDark ? <BsFillSunFill /> : <BsFillMoonFill />}
-          </Button>
+            <Box className={s.statistics} display="flex" flexDirection="column" height="99vh" alignItems="center" justifyContent="end" position="sticky" top="0" ml="2" gap="20px" zIndex="100" >
 
-          {/* Disable cards */}
-          <Button
-            zIndex="999"
-            fontSize="100"
-            p="1"
-            bgColor="transparent"
-            border="solid 3px"
-            borderRadius="50%"
-            height="50px"
-            width="50px"
-            color={themeDark ? "white" : "black"}
-            onClick={() => setFondo(!fondo)}
-            transition="all 5s"
-          >
-            {fondo ? <BsFillEyeSlashFill /> : <BsFillEyeFill />}
-          </Button>
+              {/* themeDark */}
+              <Button
+                zIndex="999"
+                onClick={() => changeTheme(themeDark)}
+                fontSize="100"
+                p="1"
+                bgColor="transparent"
+                border="solid 3px"
+                borderRadius="50%"
+                height="50px"
+                width="50px"
+                color={themeDark ? "white" : "black"}
+                transition="all 1.5s"
+              >
+                {themeDark ? <BsFillSunFill /> : <BsFillMoonFill />}
+              </Button>
 
-          {/* Statistics */}
-          <Box className={fondo ? s.statisticsHidden : s.statistics} display="">
-            <Statistics />
+              {/* Disable cards */}
+              <Button
+                zIndex="999"
+                fontSize="100"
+                p="1"
+                bgColor="transparent"
+                border="solid 3px"
+                borderRadius="50%"
+                height="50px"
+                width="50px"
+                color={themeDark ? "white" : "black"}
+                onClick={() => setFondo(!fondo)}
+                transition="all 1.5s"
+              >
+                {fondo ? <BsFillEyeSlashFill /> : <BsFillEyeFill />}
+              </Button>
+
+              {/* Statistics */}
+              <Box className={fondo ? s.statisticsHidden : s.statistics} display="">
+                <Statistics />
+              </Box>
+              {/* ************ */}
+
+            </Box>
+            {/* ************ */}
+
+            <Box position="relative" my="4" mr="6%" display={fondo ? "none" : "flex"} flexDirection="column" alignItems="center" zIndex="100" width="100%" mt="7vh" >
+
+              {/* Banner */}
+              <Box w="100%" hidden={JSON.parse(localStorage.getItem("hiddenBanner"))}>
+                <Banner setHiddenBanner={setHiddenBanner} />
+              </Box>
+              {/* ************ */}
+
+              {/* ScrollInfinite */}
+              <ScrollInfinite />
+              {/* ************ */}
+
+            </Box>
           </Box>
-          {/* ************ */}
-
-        </Box>
-        {/* ************ */}
-
-        <Box position="relative" my="4" mr="6%" display={fondo ? "none" : "flex"} flexDirection="column" alignItems="center" zIndex="100" width="100%" mt="7vh" >
-
-          {/* Banner */}
-          <Box w="100%" hidden={JSON.parse(localStorage.getItem("hiddenBanner"))}>
-            <Banner setHiddenBanner={setHiddenBanner} />
-          </Box>
-          {/* ************ */}
-
-          {/* ScrollInfinite */}
-          <ScrollInfinite />
-          {/* ************ */}
-
-        </Box>
-      </Box>
+          : allCharacter.length && !filteredItems.length ?
+            <Box position="absolute" top="7vh" height="93vh" display="flex" flexDirection="column" alignItems="center" justifyContent="center" width="100%" bgColor="red" textAlign="center">
+              {/* <Img src={rick_gif} alt="rick_loading" width="300px" /> */}
+              <Heading>No se encontraron personajes</Heading>
+            </Box>
+            : <Box position="absolute" top="7vh" height="93vh" display="flex" flexDirection="column" alignItems="center" justifyContent="center" width="100%">
+              <Img src={rick_gif} alt="rick_loading" width="300px" />
+              <Heading>Loading</Heading>
+            </Box>
+      }
 
 
       {/* Filtro */}
       <Drawer placement='left' onClose={onClose} isOpen={isOpen} size={window.innerWidth > 991 ? "xs" : "r"}>
         <DrawerContent>
-          <Box style={{ display: "flex", justifyContent: "center", position: "relative", width: "100%", height: "50px", alignItems: "center" }}>
+          <Box bgColor="#4130C2" style={{ display: "flex", justifyContent: "center", position: "relative", width: "100%", height: "50px", alignItems: "center" }}>
             Filters
             <Button onClick={onClose} style={{ display: "flex", position: "absolute", top: "3px", right: "3px" }}>
               <CloseIcon />
             </Button>
           </Box>
-          <DrawerBody>
+          <DrawerBody bgColor="#4130C2" >
             <Filter onClose={onClose} values={values} setValues={setValues} />
           </DrawerBody>
         </DrawerContent>
@@ -163,6 +179,6 @@ export default function Home() {
       </Box>
       {/* ************ */}
 
-    </Box>
+    </Box >
   )
 }

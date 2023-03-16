@@ -24,10 +24,10 @@ export default function Filter({ onClose, values, setValues }) {
   }
 
   return (
-    <Box display="flex" flexDirection="column" justifyContent="space-around" height="100%">
+    <Box display="flex" flexDirection="column" justifyContent="space-around" height="100%" bgColor="#4130C2" width="100%">
 
       {/* Species  */}
-      <Box bgColor="purple.200" >
+      <Box bgColor="purple.200" p="3">
         <Box display="flex" justifyContent="center">
           Species
         </Box>
@@ -38,7 +38,7 @@ export default function Filter({ onClose, values, setValues }) {
       {/* ------------------------ */}
 
       {/* Type  */}
-      <Box bgColor="gray.200">
+      <Box bgColor="gray.200" p="3">
         <Box display="flex" justifyContent="center">
           Type
         </Box>
@@ -47,7 +47,7 @@ export default function Filter({ onClose, values, setValues }) {
       {/* ------------------------ */}
 
       {/* Status  */}
-      <Box bgColor="red.200">
+      <Box bgColor="red.200" p="3">
         <Box display="flex" justifyContent="center">
           Status
         </Box>
@@ -71,7 +71,7 @@ export default function Filter({ onClose, values, setValues }) {
       {/* ------------------------ */}
 
       {/* Gender  */}
-      <Box bgColor="blue.200">
+      <Box bgColor="blue.200" p="3">
         <Box display="flex" justifyContent="center">
           Gender
         </Box>

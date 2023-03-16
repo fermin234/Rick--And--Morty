@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 export default function Statistics() {
   const character = useSelector(s => s.filteredItems)
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" gap="20px" justifyContent="center" bgColor="#4130C2" borderRadius="20px" border=" 3px solid black" transition="all 5s" mx="2">
+    <Box display="flex" flexDirection="column" alignItems="center" gap="20px" justifyContent="center" bgColor="#4130C2" borderRadius="20px" border=" 3px solid black" transition="all 1.5s" mx="2">
       {/* Characters */}
       <Box bgColor="#2CB5A0" display="flex" flexDirection="column" alignItems="center" px="1" borderTopRadius="15px">
         <Heading as='h4' size='md'>
