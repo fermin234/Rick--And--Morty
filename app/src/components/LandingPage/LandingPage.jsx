@@ -3,19 +3,20 @@ import s from './landingPage.module.css'
 import { BsLinkedin } from "react-icons/bs";
 import { FaWhatsappSquare, FaGithubSquare } from "react-icons/fa";
 import { ImMail } from "react-icons/im";
+import { Box } from "@chakra-ui/react";
 
 export default function landingPage() {
   return (
     <div className={s.containerAll}>
 
       {/* Title */}
-      <div className={s.container}>
+      <Box className={s.container}>
         <Link to="/home" className={s.container}>
           <div className={s.neon}>Rick </div>
           <div className={s.flux}>& </div>
           <div className={s.neon}>Morty </div>
         </Link >
-      </div>
+      </Box>
       {/* ***** */}
 
       {/* Redes */}

@@ -66,16 +66,14 @@ export default function NavBar({ onOpen, values, setValues, setIsOpen2, isOpen2 
 
 
       <Box display="flex" justifyContent="flex-end" gap="10px" fontSize="3vh">
-        <Box visibility={history.location.pathname === "/home" ? "hidden" : ""}>
-          <Link to="/home">
+        <Box visibility={history.location.pathname === "/home" ? "hidden" : ""} _hover={{ color: "grey" }}>
+          <Link to="/home" >
             <AiFillHome />
           </Link>
         </Box>
-        {/* <Link > */}
-        <Box onClick={() => setIsOpen2(!isOpen2)} _hover={{ cursor: "pointer" }}>
+        <Box onClick={() => setIsOpen2(!isOpen2)} _hover={{ cursor: "pointer", color: "grey" }}>
           <IoMdSettings />
         </Box>
-        {/* </Link> */}
       </Box>
     </Box >
   )

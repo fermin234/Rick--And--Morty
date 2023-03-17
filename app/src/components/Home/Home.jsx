@@ -8,10 +8,12 @@ import ScrollInfinite from "../InfiniteScroll/InfiniteScroll.jsx";
 import { CloseIcon } from '@chakra-ui/icons'
 import { useDispatch, useSelector } from "react-redux";
 import { BsFillMoonFill, BsFillSunFill, BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
-import { Button, DrawerBody, useDisclosure, Drawer, DrawerContent, Box, Img, Tooltip, Heading } from '@chakra-ui/react'
+import { Button, DrawerBody, useDisclosure, Drawer, DrawerContent, Box, Img, Tooltip, Heading, DrawerOverlay } from '@chakra-ui/react'
 import { characters, getSpecies } from "../../redux/actions";
 import image from "../../assets/pngCharacter/rick_arriba1-removebg-preview.png"
 import rick_gif from "../../assets/loader/rick.gif"
+import crazy_gif from "../../assets/error/error2.gif"
+import morty_gif from "../../assets/error/error1.gif"
 import Settings from "../Settings/Settings";
 
 export default function Home() {
@@ -127,9 +129,12 @@ export default function Home() {
             </Box>
           </Box>
           : allCharacter.length && !filteredItems.length ?
-            <Box position="absolute" top="7vh" height="93vh" display="flex" flexDirection="column" alignItems="center" justifyContent="center" width="100%" bgColor="red" textAlign="center">
-              {/* <Img src={rick_gif} alt="rick_loading" width="300px" /> */}
-              <Heading>No se encontraron personajes</Heading>
+            <Box position="absolute" top="7vh" height="93vh" display="flex" flexDirection="column" alignItems="center" justifyContent="center" width="100%" textAlign="center">
+              <Box bgColor="#2cb5a0" display="flex" alignItems="center" borderRadius="15px">
+                <Img src={crazy_gif} w="300px" al="so_crazy.gif" />
+                <Heading px="10">No se encontraron personajes</Heading>
+                <Img src={morty_gif} w="200px" al="morty.gif" />
+              </Box>
             </Box>
             : <Box position="absolute" top="7vh" height="93vh" display="flex" flexDirection="column" alignItems="center" justifyContent="center" width="100%">
               <Img src={rick_gif} alt="rick_loading" width="300px" />
@@ -139,14 +144,15 @@ export default function Home() {
 
 
       {/* Filtro */}
-      <Drawer placement='left' onClose={onClose} isOpen={isOpen} size={window.innerWidth > 991 ? "xs" : "r"}>
+      <Drawer placement='left' onClose={onClose} isOpen={isOpen} size={window.innerWidth > 991 ? "xs" : "r"} >
+        <DrawerOverlay />
         <DrawerContent>
-          <Box bgColor="#4130C2" style={{ display: "flex", justifyContent: "center", position: "relative", width: "100%", height: "50px", alignItems: "center" }}>
+          <Heading bgColor="#4130C2" pt="2" size="lg" display="flex" justifyContent="center">
             Filters
-            <Button onClick={onClose} style={{ display: "flex", position: "absolute", top: "3px", right: "3px" }}>
+            <Button onClick={onClose} color="white" display="flex" position="absolute" top="3px" right="3px" bgColor="transparent" _hover={{ bgColor: "tranparent", color: "black" }}>
               <CloseIcon />
             </Button>
-          </Box>
+          </Heading>
           <DrawerBody bgColor="#4130C2" >
             <Filter onClose={onClose} values={values} setValues={setValues} />
           </DrawerBody>
@@ -156,10 +162,13 @@ export default function Home() {
 
       {/* Settings */}
       <Drawer placement='right' onClose={() => setIsOpen2(!isOpen2)} isOpen={isOpen2} size={window.innerWidth > 991 ? "xs" : "r"}>
+        <DrawerOverlay />
         <DrawerContent>
-          <Box style={{ display: "flex", justifyContent: "center", position: "relative", width: "100%", height: "50px", alignItems: "center" }}>
-            Settings
-            <Button onClick={() => setIsOpen2(!isOpen2)} style={{ display: "flex", position: "absolute", top: "3px", left: "3px" }}>
+          <Box display="flex" justifyContent="center" position="relative">
+            <Heading pt="2" size="lg" display="flex" justifyContent="center">
+              Settings
+            </Heading>
+            <Button onClick={() => setIsOpen2(!isOpen2)} color="black" display="flex" position="absolute" top="3px" left="3px" bgColor="transparent" _hover={{ bgColor: "tranparent", color: "red" }}>
               <CloseIcon />
             </Button>
           </Box>
@@ -171,7 +180,7 @@ export default function Home() {
       {/* ************ */}
 
       {/* Up page */}
-      <Box position="fixed" bottom="0" w="100%" right="0" height="30vh" justifyContent="end" alignItems="end" display={fondo ? "none" : "flex"}>
+      <Box position="fixed" bottom="0" w="100%" right="0" height="30vh" justifyContent="end" alignItems="end" display={fondo ? "none" : "flex"} >
         <Tooltip hasArrow label='Subir' bg='gray.300' color='black' placement='top'>
           <Img className={s.image} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth', })} src={image} alt="Rick_up" mr="2" mb="2" />
 

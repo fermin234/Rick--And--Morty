@@ -2,6 +2,10 @@
   width: 10vh;
 }
 
+.o {
+  overflow-y: scroll;
+}
+
 @media only screen and (max-width: 459px) {
   .image {
     width: 7vh;

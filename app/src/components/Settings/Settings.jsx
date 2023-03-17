@@ -1,4 +1,4 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Heading } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 
 export default function Settings({ themeDark, setThemeDark, setHiddenBanner }) {
@@ -14,7 +14,9 @@ export default function Settings({ themeDark, setThemeDark, setHiddenBanner }) {
     <Box display="flex" flexDirection="column" justifyContent="space-between" height="100%">
       <h1>Las settings</h1>
       <Button onClick={resetSettings}>
-        Restablecer configuracion
+        <Heading fontSize="20px">
+          Restablecer configuracion
+        </Heading>
       </Button>
     </Box>
   )

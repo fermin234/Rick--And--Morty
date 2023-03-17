@@ -14,6 +14,7 @@ export default function Statistics() {
           {character.length}
         </Heading>
       </Box>
+      {/* *********** */}
 
       {/* Status */}
       <Box bgColor="#2CB5A0" display="flex" flexDirection="column" alignItems="center" width="100%">
@@ -33,6 +34,7 @@ export default function Statistics() {
           {character.filter(e => e.status === "unknown").length}
         </Heading>
       </Box>
+      {/* *********** */}
 
       {/* Gender */}
       <Box bgColor="#2CB5A0" display="flex" flexDirection="column" alignItems="center" width="100%">
@@ -56,6 +58,7 @@ export default function Statistics() {
           {character.filter(e => e.gender === "unknown").length}
         </Heading>
       </Box>
+      {/* *********** */}
 
       {/* Created */}
       <Box bgColor="#2CB5A0" w="100%" display="flex" flexDirection="column" alignItems="center" px="1" pt="1" borderBottomRadius="15px" width="100%">
@@ -67,6 +70,7 @@ export default function Statistics() {
           0
         </Heading>
       </Box>
+      {/* *********** */}
 
     </Box>
   )

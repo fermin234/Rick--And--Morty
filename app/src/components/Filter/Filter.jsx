@@ -1,4 +1,4 @@
-import { Box, Input, Radio, RadioGroup, Stack, Button, Select } from "@chakra-ui/react";
+import { Box, Input, Radio, RadioGroup, Stack, Button, Select, Heading } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { cleanFilters, filter } from "../../redux/actions";
 
@@ -27,29 +27,35 @@ export default function Filter({ onClose, values, setValues }) {
     <Box display="flex" flexDirection="column" justifyContent="space-around" height="100%" bgColor="#4130C2" width="100%">
 
       {/* Species  */}
-      <Box bgColor="purple.200" p="3">
-        <Box display="flex" justifyContent="center">
-          Species
+      <Box bgColor={"#2cb5a0"} borderRadius="15px" p="3">
+        <Box display="flex" justifyContent="center" pb="10px">
+          <Heading fontSize="20px">
+            Species
+          </Heading>
         </Box>
-        <Select textAlign="center" placeholder='Human | Alien | Humanoid ...' defaultValue={filterValues.species ? filterValues.species : ""} onChange={e => filterCharacters(e.target.value, "species")}>
+        <Select bgColor="white" textAlign="center" placeholder='Human | Alien | Humanoid ...' defaultValue={filterValues.species ? filterValues.species : ""} onChange={e => filterCharacters(e.target.value, "species")}>
           {species ? species.map(e => <option value={e.name} key={e.name}>{e.name}</option>) : ""}
         </Select>
       </Box>
       {/* ------------------------ */}
 
       {/* Type  */}
-      <Box bgColor="gray.200" p="3">
-        <Box display="flex" justifyContent="center">
-          Type
+      <Box bgColor={"#2cb5a0"} p="3" borderRadius="15px">
+        <Box display="flex" justifyContent="center" pb="10px">
+          <Heading fontSize="20px">
+            Type
+          </Heading>
         </Box>
         <Input variant='filled' textAlign="center" placeholder=' Experiment | Superhuman ...' defaultValue={filterValues.type ? filterValues.type : ""} onChange={e => filterCharacters(e.target.value, "type")} />
       </Box>
       {/* ------------------------ */}
 
       {/* Status  */}
-      <Box bgColor="red.200" p="3">
-        <Box display="flex" justifyContent="center">
-          Status
+      <Box bgColor={"#2cb5a0"} p="3" borderRadius="15px">
+        <Box display="flex" justifyContent="center" pb="10px">
+          <Heading fontSize="20px">
+            Status
+          </Heading>
         </Box>
         <RadioGroup defaultValue={filterValues.status ? filterValues.status : ""}
           onChange={e => filterCharacters(e, "status")}>
@@ -71,9 +77,11 @@ export default function Filter({ onClose, values, setValues }) {
       {/* ------------------------ */}
 
       {/* Gender  */}
-      <Box bgColor="blue.200" p="3">
-        <Box display="flex" justifyContent="center">
-          Gender
+      <Box bgColor={"#2cb5a0"} p="3" borderRadius="15px">
+        <Box display="flex" justifyContent="center" pb="10px">
+          <Heading fontSize="20px">
+            Gender
+          </Heading>
         </Box>
         <RadioGroup defaultValue={filterValues.gender ? filterValues.gender : ""}
           onChange={e => filterCharacters(e, "gender")}>
@@ -99,7 +107,7 @@ export default function Filter({ onClose, values, setValues }) {
 
       {/* Gender  */}
 
-      <Button onClick={() => {
+      <Button bgColor={"#2cb5a0"} onClick={() => {
         dispatch(cleanFilters()), onClose(), document.getElementById("input").value = "", setValues(values = {
           name: null,
           species: null,
@@ -108,7 +116,9 @@ export default function Filter({ onClose, values, setValues }) {
           gender: null,
         })
       }}>
-        Clear Filters
+        <Heading fontSize="20px">
+          Clear filters
+        </Heading>
       </Button>
       {/* ------------------------ */}
     </Box >

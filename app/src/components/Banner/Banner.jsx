@@ -30,7 +30,7 @@ export default function Banner({ setHiddenBanner }) {
   }
 
   return (
-    <Box className={s.imagen} bgColor="purple" width="100%" borderRadius="30px" p="30px" position="relative" mb="4" overflow="clip">
+    <Box className={s.imagen} width="100%" borderRadius="30px" p="30px" position="relative" mb="4" overflow="clip">
       <Heading color="white" fontSize="5xl" ml='10'>
         Ahora pudes crear tu propio personaje
       </Heading>
