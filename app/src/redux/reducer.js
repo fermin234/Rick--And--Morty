@@ -1,5 +1,7 @@
 import {
   FILTER,
+  GET_TYPES,
+  GET_ORIGIN,
   GET_SPECIES,
   RESET_SCROLL,
   CLEAN_FILTERS,
@@ -10,6 +12,8 @@ import {
 const initialState = {
   characters: [],
   species: [],
+  types: [],
+  origin: [],
   items: [],
   filteredItems: [],
   filterValues: {
@@ -71,6 +75,18 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         species: action.payload,
+      };
+
+    case GET_TYPES:
+      return {
+        ...state,
+        types: action.payload,
+      };
+
+    case GET_ORIGIN:
+      return {
+        ...state,
+        origin: action.payload,
       };
 
     case RESET_SCROLL:

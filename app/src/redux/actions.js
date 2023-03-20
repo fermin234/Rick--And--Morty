@@ -1,5 +1,7 @@
 import axios from "axios";
 export const FILTER = "FILTER";
+export const GET_TYPES = "GET_TYPES";
+export const GET_ORIGIN = "GET_ORIGIN";
 export const GET_SPECIES = "GET_SPECIES";
 export const RESET_SCROLL = "RESET_SCROLL";
 export const CLEAN_FILTERS = "CLEAN_FILTERS";
@@ -74,6 +76,26 @@ export function resetScroll() {
   return async (dispatch) => {
     return dispatch({
       type: RESET_SCROLL,
+    });
+  };
+}
+
+export function getTypes() {
+  return async (dispatch) => {
+    const result = await axios.get("/types");
+    return dispatch({
+      type: GET_TYPES,
+      payload: result.data,
+    });
+  };
+}
+
+export function getOrigin() {
+  return async (dispatch) => {
+    const result = await axios.get("/origin");
+    return dispatch({
+      type: GET_ORIGIN,
+      payload: result.data,
     });
   };
 }
