@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import s from './home.module.css'
 import NavBar from "../NavBar/NavBar.jsx";
 import Filter from "../Filter/Filter.jsx";
@@ -6,10 +6,9 @@ import Banner from "../Banner/Banner.jsx";
 import Statistics from "../Statistics/Statistics.jsx";
 import ScrollInfinite from "../InfiniteScroll/InfiniteScroll.jsx";
 import { CloseIcon } from '@chakra-ui/icons'
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { BsFillMoonFill, BsFillSunFill, BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { Button, DrawerBody, useDisclosure, Drawer, DrawerContent, Box, Img, Tooltip, Heading, DrawerOverlay } from '@chakra-ui/react'
-import { characters, getSpecies } from "../../redux/actions";
 import image from "../../assets/pngCharacter/rick_arriba1-removebg-preview.png"
 import rick_gif from "../../assets/loader/rick.gif"
 import crazy_gif from "../../assets/error/error2.gif"
@@ -17,7 +16,6 @@ import morty_gif from "../../assets/error/error1.gif"
 import Settings from "../Settings/Settings";
 
 export default function Home() {
-  const dispatch = useDispatch()
   const [themeDark, setThemeDark] = useState(JSON.parse(localStorage.getItem("themeDark")))
   const [hiddenBanner, setHiddenBanner] = useState(JSON.parse(localStorage.getItem("banner")))
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -27,7 +25,6 @@ export default function Home() {
   const filterValues = useSelector(s => s.filterValues)
   const filteredItems = useSelector(s => s.filteredItems)
   const items = useSelector(s => s.items)
-  const species = useSelector(s => s.species)
 
   const [fondo, setFondo] = useState(false);
   let [values, setValues] = useState({
@@ -43,19 +40,6 @@ export default function Home() {
     localStorage.setItem("themeDark", JSON.stringify(themeDark))
   };
 
-  useEffect(() => {
-    //-----Si no hay personajes, los pido-----
-    if (!allCharacter.length) {
-      dispatch(characters())
-    }
-  }, [])
-
-  useEffect(() => {
-    //-----Si no hay especies, las pido-----
-    if (!species.length) {
-      dispatch(getSpecies())
-    }
-  }, [])
 
   return (
     <Box className={themeDark ? s.dark : s.light} display="flex" flexDirection="column" overflow="clip" position="relative" transition="all 1.5s">
