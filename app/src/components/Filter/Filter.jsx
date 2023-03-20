@@ -5,6 +5,7 @@ import { cleanFilters, filter } from "../../redux/actions";
 export default function Filter({ onClose, values, setValues }) {
   const dispatch = useDispatch();
   const species = useSelector(s => s.species)
+  const type = useSelector(s => s.types)
   const filterValues = useSelector(s => s.filterValues)
   //Agregar debounce a los inputs
   //Agregar debounce a los inputs
@@ -33,20 +34,24 @@ export default function Filter({ onClose, values, setValues }) {
             Species
           </Heading>
         </Box>
-        <Select bgColor="white" textAlign="center" placeholder='Human | Alien | Humanoid ...' defaultValue={filterValues.species ? filterValues.species : ""} onChange={e => filterCharacters(e.target.value, "species")}>
+        <Select bgColor="white" textAlign="center" defaultValue={filterValues.species ? filterValues.species : "Human | Alien | Humanoid ..."} onChange={e => filterCharacters(e.target.value, "species")}>
+          <option disabled selected>Human | Alien | Humanoid ...</option>
           {species ? species.map(e => <option value={e.name} key={e.name}>{e.name}</option>) : ""}
         </Select>
       </Box>
       {/* ------------------------ */}
 
       {/* Type  */}
-      <Box bgColor={"#2cb5a0"} p="3" borderRadius="15px">
+      <Box bgColor={"#2cb5a0"} borderRadius="15px" p="3">
         <Box display="flex" justifyContent="center" pb="10px">
           <Heading fontSize="20px">
             Type
           </Heading>
         </Box>
-        <Input variant='filled' textAlign="center" placeholder=' Experiment | Superhuman ...' defaultValue={filterValues.type ? filterValues.type : ""} onChange={e => filterCharacters(e.target.value, "type")} />
+        <Select bgColor="white" textAlign="center" defaultValue={filterValues.type ? filterValues.type : "Selecciona una opción"} onChange={e => filterCharacters(e.target.value, "type")}>
+          <option disabled selected>Selecciona una opción</option>
+          {type ? type.map(e => <option value={e.name} key={e.name}>{e.name}</option>) : ""}
+        </Select>
       </Box>
       {/* ------------------------ */}
 
